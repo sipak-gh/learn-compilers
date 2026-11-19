@@ -1,0 +1,53 @@
+# Generated files: only hand-written sources belong in the repository.
+
+# Executables (files without an extension) that `make` and `pebc build` leave
+# in the example directories, the project snapshots and their tests/ folders.
+/examples/*/*
+!/examples/*/*.*
+!/examples/*/Makefile
+/project/*/*
+!/project/*/*.*
+!/project/*/src/
+!/project/*/samples/
+!/project/*/tests/
+/project/*/tests/*
+!/project/*/tests/*.*
+!/project/*/tests/run/
+!/project/*/tests/errors/
+!/project/*/tests/ast/
+
+# IL, assembly and other outputs of pebc, qbe, cc and zig cc
+*.ssa
+*.s
+*.ll
+*.o
+*.ppm
+a.out
+
+# The hand-written QBE IL examples
+!/examples/ch01/fact.ssa
+!/examples/ch01/hello.ssa
+!/examples/ch01/t1.ssa
+!/examples/ch01/t2.ssa
+!/examples/ch01/t3.ssa
+!/examples/ch04/alloc.ssa
+!/examples/ch04/jnz.ssa
+!/examples/ch05/signs.ssa
+!/examples/ch05/tr.ssa
+!/examples/ch05/ty2.ssa
+!/examples/ch05/wc.ssa
+!/examples/ch06/memory.ssa
+!/examples/ch09/dz.ssa
+
+# Zig build outputs (golden and difftest work files live in .zig-cache too)
+zig-out/
+.zig-cache/
+zig-pkg/
+build/
+__pycache__/
+
+# Editors
+*.swp
+*~
+.vscode/
+.idea/

@@ -1,0 +1,6 @@
+extern fn printf(format: *u8, ...) i32;
+
+fn main() {
+    let total = 100;
+    printf("%ld per day\n", total / 0);
+}

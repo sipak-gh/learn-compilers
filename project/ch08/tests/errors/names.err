@@ -1,0 +1,15 @@
+errors/names.peb:5:5: error: cannot assign to 'count', which was declared with 'let'
+    count = count + 1;
+    ^~~~~
+errors/names.peb:4:9: note: use 'var' here to make it a variable
+    let count = 1;
+        ^~~~~
+errors/names.peb:6:21: error: unknown name 'cuont'
+    printf("%ld\n", cuont);
+                    ^~~~~
+errors/names.peb:7:5: error: 'printf' is a function, not a variable
+    printf = 3;
+    ^~~~~~
+errors/names.peb:8:13: error: 'main' is a function, not a variable
+    let f = main;
+            ^~~~

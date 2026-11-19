@@ -1,0 +1,8 @@
+(var grid [3][4]u8)
+(let answer 42)
+(fn main ()
+  (var a [10]i64)
+  (var p *i64 (& (index a 2)))
+  (= (* p) (+ (* (* q)) (index (index a i) j)))
+  (var r (& (index (* p) 0)))
+  (let s (* (- (* p)) 2)))

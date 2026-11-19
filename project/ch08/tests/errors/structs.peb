@@ -1,0 +1,45 @@
+// Mistakes with structs, null and casts.
+extern fn printf(format: *u8, ...) i32;
+
+struct Point {
+    x: i64,
+    y: i64,
+    x: i32,
+}
+
+struct Point {
+    z: i64,
+}
+
+struct Loop {
+    next: Loop,
+}
+
+struct Empty {}
+
+struct i64 {
+    a: u8,
+}
+
+fn length(p: Point) i64 {
+    return p.x;
+}
+
+fn origin() Point {
+    var p: Point;
+    return p;
+}
+
+fn main() {
+    var p: Point;
+    p.z = 1;
+    let n = 5;
+    let m = n.x;
+    let q = null;
+    var r: *Point = null;
+    let s = r as *u8;
+    let t = p as i64;
+    let same = p == p;
+    printf("%ld\n", p);
+    let size = sizeof(Pont);
+}

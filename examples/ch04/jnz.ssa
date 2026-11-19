@@ -1,0 +1,17 @@
+data $fmt = { b "big=%ld", b 10, b 0 }
+export function w $main() {
+@start
+	%x.1 =l alloc8 8
+	storel 4294967296, %x.1
+	%t1 =l loadl %x.1
+	jnz %t1, @yes, @no
+@yes
+	call $printf(l $fmt, ..., l 1)
+	ret 3
+@dead.1
+	%t2 =l add 1, 2
+@no
+	call $printf(l $fmt, ..., l 0)
+	%t3 =l copy 7
+	ret %t3
+}

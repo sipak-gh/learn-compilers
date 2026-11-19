@@ -1,0 +1,7 @@
+fn main() {
+    break;
+    while true {
+        continue;
+    }
+    continue;
+}

@@ -1,0 +1,3 @@
+errors/too_large.peb:1:1: error: integer literal is too large
+99999999999999999999 + 1
+^~~~~~~~~~~~~~~~~~~~

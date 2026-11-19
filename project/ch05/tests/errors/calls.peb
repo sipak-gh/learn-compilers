@@ -1,0 +1,15 @@
+extern fn printf(format: *u8, ...) i32;
+
+fn add(a: i64, b: i64) i64 {
+    return a + b;
+}
+
+fn main() {
+    add(1);
+    add(1, 2, 3);
+    printf();
+    let n = 5;
+    n(1);
+    missing(2);
+    add(1, "two");
+}

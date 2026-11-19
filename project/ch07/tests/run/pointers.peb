@@ -1,0 +1,36 @@
+// Pointers: swapping through two of them, an "out" parameter, and a
+// pointer to a pointer.
+extern fn printf(format: *u8, ...) i32;
+
+fn swap(a: *i64, b: *i64) {
+    let t = *a;
+    *a = *b;
+    *b = t;
+}
+
+// Returns the quotient and writes the remainder through `rem`.
+fn divmod(n: i64, d: i64, rem: *i64) i64 {
+    *rem = n % d;
+    return n / d;
+}
+
+fn main() {
+    var x = 1;
+    var y = 2;
+    swap(&x, &y);
+    printf("x = %ld, y = %ld\n", x, y);
+
+    var r: i64;
+    let q = divmod(17, 5, &r);
+    printf("17 = %ld * 5 + %ld\n", q, r);
+
+    var p = &x;
+    let pp = &p;
+    **pp = 42;
+    printf("x = %ld, p == &x: %d\n", x, p == &x);
+
+    var small: u8 = 200;
+    let ps = &small;
+    *ps = *ps + 100;
+    printf("small = %d\n", small);
+}

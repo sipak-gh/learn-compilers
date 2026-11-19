@@ -1,0 +1,7 @@
+fn main() {
+    1 + 2 * 3 - 4;
+    a || b && c == d + e * f;
+    -x.y + *p[2] * !f(1, g(2));
+    'a' + '\n' == "tab\t" || true;
+    -n as u8 * 2 + x as *u8 as i64;
+}

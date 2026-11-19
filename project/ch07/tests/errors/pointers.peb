@@ -1,0 +1,29 @@
+// Mistakes with pointers, arrays and globals.
+extern fn printf(format: *u8, ...) i32;
+
+var total = 0;
+var start = total;
+let empty: i64;
+var nothing: [0]i64;
+
+fn sum(a: [4]i64) i64 {
+    return 0;
+}
+
+fn main() {
+    let x = 1;
+    var p = &x;
+    var y = 2;
+    let q = &y;
+    let n = *y;
+    var b: [4]i64;
+    var c: [4]i64;
+    b = c;
+    let d = b;
+    let e = b[true];
+    let f = y[0];
+    let g = q + 1;
+    let h = &5;
+    let k: i64;
+    printf("%ld\n", b);
+}

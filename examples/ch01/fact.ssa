@@ -1,0 +1,27 @@
+data $fmt = { b "%ld! = %ld\n", b 0 }
+
+function l $fact(l %n) {
+@start
+	%small =w cslel %n, 1
+	jnz %small, @base, @rec
+@base
+	ret 1
+@rec
+	%m =l sub %n, 1
+	%f =l call $fact(l %m)
+	%r =l mul %n, %f
+	ret %r
+}
+
+export function w $main() {
+@start
+	%i =l copy 0
+@loop
+	%f =l call $fact(l %i)
+	call $printf(l $fmt, ..., l %i, l %f)
+	%i =l add %i, 1
+	%more =w csltl %i, 11
+	jnz %more, @loop, @done
+@done
+	ret 0
+}

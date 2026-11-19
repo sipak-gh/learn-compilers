@@ -1,0 +1,8 @@
+extern fn puts(s: *u8) i32;
+
+fn helper() {
+    puts("I am not main");
+}
+
+fn helper() {
+}

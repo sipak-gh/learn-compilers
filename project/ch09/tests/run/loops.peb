@@ -1,0 +1,21 @@
+// break and continue leave the innermost loop only.
+extern fn printf(format: *u8, ...) i32;
+
+fn main() {
+    var i = 0;
+    while i < 3 {
+        i = i + 1;
+        var j = 0;
+        while j < 4 {
+            j = j + 1;
+            if j == 2 {
+                continue;
+            }
+            if j == i + 2 {
+                break;
+            }
+            printf("(%ld, %ld) ", i, j);
+        }
+        printf("j = %ld\n", j);
+    }
+}

@@ -1,0 +1,122 @@
+// Conway's Game of Life on a grid that wraps around at the edges,
+// starting with Gosper's glider gun. Prints every generation.
+extern fn printf(format: *u8, ...) i32;
+extern fn putchar(c: i32) i32;
+extern fn malloc(size: i64) *u8;
+extern fn free(p: *u8);
+
+struct Grid {
+    width: i64,
+    height: i64,
+    cells: *bool,
+}
+
+fn newGrid(width: i64, height: i64) *Grid {
+    let g = malloc(sizeof(Grid)) as *Grid;
+    g.width = width;
+    g.height = height;
+    g.cells = malloc(width * height * sizeof(bool)) as *bool;
+    var i = 0;
+    while i < width * height {
+        g.cells[i] = false;
+        i = i + 1;
+    }
+    return g;
+}
+
+fn freeGrid(g: *Grid) {
+    free(g.cells as *u8);
+    free(g as *u8);
+}
+
+// Off the edge on one side means back in on the other.
+fn get(g: *Grid, x: i64, y: i64) bool {
+    let wx = (x + g.width) % g.width;
+    let wy = (y + g.height) % g.height;
+    return g.cells[wy * g.width + wx];
+}
+
+fn set(g: *Grid, x: i64, y: i64, alive: bool) {
+    g.cells[y * g.width + x] = alive;
+}
+
+fn neighbours(g: *Grid, x: i64, y: i64) i64 {
+    var n = 0;
+    var dy = -1;
+    while dy <= 1 {
+        var dx = -1;
+        while dx <= 1 {
+            if (dx != 0 || dy != 0) && get(g, x + dx, y + dy) {
+                n = n + 1;
+            }
+            dx = dx + 1;
+        }
+        dy = dy + 1;
+    }
+    return n;
+}
+
+fn step(from: *Grid, to: *Grid) {
+    var y = 0;
+    while y < from.height {
+        var x = 0;
+        while x < from.width {
+            let n = neighbours(from, x, y);
+            set(to, x, y, n == 3 || (n == 2 && get(from, x, y)));
+            x = x + 1;
+        }
+        y = y + 1;
+    }
+}
+
+fn print(g: *Grid) {
+    var y = 0;
+    while y < g.height {
+        var x = 0;
+        while x < g.width {
+            if get(g, x, y) {
+                putchar('#');
+            } else {
+                putchar('.');
+            }
+            x = x + 1;
+        }
+        putchar('\n');
+        y = y + 1;
+    }
+}
+
+// Draws a pattern written as rows of '.' and '#', separated by '/'.
+fn draw(g: *Grid, left: i64, top: i64, pattern: *u8) {
+    var x = left;
+    var y = top;
+    var i = 0;
+    while pattern[i] != 0 {
+        if pattern[i] == '/' {
+            x = left;
+            y = y + 1;
+        } else {
+            set(g, x, y, pattern[i] == '#');
+            x = x + 1;
+        }
+        i = i + 1;
+    }
+}
+
+fn main() {
+    var a = newGrid(64, 40);
+    var b = newGrid(64, 40);
+    draw(a, 1, 1, "........................#.........../......................#.#.........../............##......##............##/...........#...#....##............##/##........#.....#...##.............../##........#...#.##....#.#.........../..........#.....#.......#.........../...........#...#................../............##....................");
+    var generation = 0;
+    while generation <= 120 {
+        printf("generation %ld\n", generation);
+        print(a);
+        step(a, b);
+        let t = a;
+        a = b;
+        b = t;
+        generation = generation + 1;
+    }
+    freeGrid(a);
+    freeGrid(b);
+}

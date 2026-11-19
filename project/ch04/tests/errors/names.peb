@@ -1,0 +1,9 @@
+extern fn printf(format, ...);
+
+fn main() {
+    let count = 1;
+    count = count + 1;
+    printf("%ld\n", cuont);
+    printf = 3;
+    let f = main;
+}

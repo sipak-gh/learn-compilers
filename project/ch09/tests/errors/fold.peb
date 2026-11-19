@@ -1,0 +1,17 @@
+// Mistakes that only show once the values are known.
+var total = 0;
+let bad_global = 24 * 60 * 60 / (60 - 60);
+
+fn main() {
+    var a: [10]i64;
+    let i = 3;
+    total = i / 0;
+    total = i % (5 - 5);
+    total = a[10];
+    total = a[2 * 5 - 11];
+    total = (-9223372036854775807 - 1) / -1;
+    let worst = (-2147483647 - 1) as i32 / (0 - 1) as i32;
+    // Not an error: pebc doesn't look at what a `let` holds.
+    let small = (-2147483647 - 1) as i32;
+    total = (small % -1) as i64;
+}

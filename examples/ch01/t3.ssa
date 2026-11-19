@@ -1,0 +1,12 @@
+export function w $main() {
+@start
+	%i =l copy 0
+@loop
+	%p =l alloc8 8
+	storel %i, %p
+	%i =l add %i, 1
+	%more =w csltl %i, 10
+	jnz %more, @loop, @done
+@done
+	ret 0
+}

@@ -1,0 +1,6 @@
+errors/loops.peb:2:5: error: 'break' outside of a loop
+    break;
+    ^~~~~~
+errors/loops.peb:6:5: error: 'continue' outside of a loop
+    continue;
+    ^~~~~~~~~

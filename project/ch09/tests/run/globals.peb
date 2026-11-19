@@ -1,0 +1,25 @@
+// Global variables live in the executable's data, not on the stack.
+extern fn printf(format: *u8, ...) i32;
+
+var calls = 0;
+let limit: i32 = -3;
+let greeting = "hello";
+var letter: u8 = 'A';
+var ready = true;
+var history: [4]i64;
+
+fn count() i64 {
+    calls = calls + 1;
+    history[calls % 4] = calls * 100;
+    return calls;
+}
+
+fn main() {
+    count();
+    count();
+    count();
+    printf("calls = %ld, limit = %d, %s %c %d\n", calls, limit, greeting, letter, ready);
+    printf("history: %ld %ld %ld %ld\n", history[0], history[1], history[2], history[3]);
+    letter = letter + 2;
+    printf("letter = %c\n", letter);
+}

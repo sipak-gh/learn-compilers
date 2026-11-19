@@ -1,0 +1,7 @@
+data $msg = { b "Hello from QBE!", b 0 }
+
+export function w $main() {
+@start
+	call $puts(l $msg)
+	ret 0
+}

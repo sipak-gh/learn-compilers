@@ -1,0 +1,3 @@
+errors/pointer.peb:3:13: error: pebc cannot compile pointers yet
+    let p = &x;
+            ^~

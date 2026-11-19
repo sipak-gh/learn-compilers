@@ -1,0 +1,8 @@
+area = 12
+area = 30, saved area = 12
+r.min = (-1, -1)
+corners[1] = (5, 4), corners[2].y = 7
+corners[1].x = 100, (*p).y = 4
+origin = (0, 0)
+sizeof: Point 16, Rect 32, Padded 24, Small 12, [4]Point 64, *Rect 8
+offsets in Padded: 0 8 16

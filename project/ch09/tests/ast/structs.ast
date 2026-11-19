@@ -1,0 +1,8 @@
+(struct Node (value i64) (next *Node) (tags [4]u8))
+(fn main ()
+  (var n Node)
+  (= (. n next) null)
+  (let p (& (index (. n tags) 2)))
+  (let size (+ (sizeof [4]*Node) (* (. (. a b) c) 2)))
+  (let q (as (call malloc (sizeof Node)) *Node))
+  (= (. (. q next) value) (- (. n value))))

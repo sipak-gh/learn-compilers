@@ -1,0 +1,6 @@
+errors/chained_compare.peb:2:14: error: comparison operators cannot be chained
+    if a < b < c {
+             ^
+errors/chained_compare.peb:2:10: note: use && to combine two comparisons
+    if a < b < c {
+         ^

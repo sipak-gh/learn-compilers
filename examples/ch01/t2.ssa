@@ -1,0 +1,8 @@
+data $fmt = { b "%ld\n", b 0 }
+
+export function w $main() {
+@start
+	%q =l div 1, 0
+	call $printf(l $fmt, ..., l %q)
+	ret 0
+}

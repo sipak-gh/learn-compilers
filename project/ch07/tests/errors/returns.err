@@ -1,0 +1,12 @@
+errors/returns.peb:7:1: error: missing 'return' at the end of 'sign', which returns 'i64'
+}
+^
+errors/returns.peb:10:5: error: 'twice' must return a value of type 'i64'
+    return;
+    ^~~~~~~
+errors/returns.peb:14:12: error: 'hello' returns nothing, so 'return' cannot have a value
+    return 1;
+           ^
+errors/returns.peb:22:11: error: 'main' must return 'i32' or nothing, not 'i64'
+fn main() i64 {
+          ^~~

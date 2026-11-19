@@ -1,0 +1,18 @@
+errors/sizes.peb:3:12: error: '[1000000][1000000]u8' is too large: the limit is 2147483647 bytes
+    cells: [1000000][1000000]u8,
+           ^~~~~~~~~~~~~~~~~~~~
+errors/sizes.peb:6:8: error: 'Pair' is too large: the limit is 2147483647 bytes
+struct Pair {
+       ^~~~
+errors/sizes.peb:12:11: error: '[1000000]Row' is too large: the limit is 2147483647 bytes
+    rows: [1000000]Row,
+          ^~~~~~~~~~~~
+errors/sizes.peb:19:12: error: '[1000000]Row' is too large: the limit is 2147483647 bytes
+var table: [1000000]Row;
+           ^~~~~~~~~~~~
+errors/sizes.peb:22:12: error: '[9223372036854775807]i64' is too large: the limit is 2147483647 bytes
+    var a: [9223372036854775807]i64;
+           ^~~~~~~~~~~~~~~~~~~~~~~~
+errors/sizes.peb:24:20: error: '[4611686018427387904]i64' is too large: the limit is 2147483647 bytes
+    let n = sizeof([4611686018427387904]i64);
+                   ^~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,3 @@
+errors/bad_char.peb:2:16: error: unexpected character '$'
+    let x = 12 $ 3;
+               ^

@@ -1,0 +1,35 @@
+// Each type wraps around at its own size.
+extern fn printf(format: *u8, ...) i32;
+extern fn putchar(c: i32) i32;
+
+fn average(a: u8, b: u8) u8 {
+    return a / 2 + b / 2;
+}
+
+fn shout(c: u8) u8 {
+    if c >= 'a' && c <= 'z' {
+        return c - 32;
+    }
+    return c;
+}
+
+fn main() {
+    let b: u8 = 200;
+    printf("%d %d %d\n", b + 100, b * 2, 3 as u8 - 4);
+    printf("%d\n", average(250, 240));
+
+    let big: i32 = 2147483647;
+    printf("%d %d\n", big + 1, -big - 1);
+
+    let n = 5000000000;
+    printf("%d %d %ld\n", n as i32, n as u8, (n as i32) as i64);
+    printf("%ld %ld\n", -1 as i32 as i64, 255 as u8 as i64);
+    printf("%ld\n", (true as i64) + (false as i64) * 10);
+
+    var c = 'a';
+    while c <= 'e' {
+        putchar(shout(c) as i32);
+        c = c + 1;
+    }
+    putchar('\n');
+}

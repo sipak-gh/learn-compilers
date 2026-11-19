@@ -1,0 +1,93 @@
+// The Mandelbrot set as a 600x400 colour image in PPM format:
+//
+//     pebc build samples/mandelbrot.peb -o mandelbrot
+//     ./mandelbrot > mandelbrot.ppm
+//
+// Numbers are fixed-point: an i64 n stands for n / 65536.
+extern fn printf(format: *u8, ...) i32;
+extern fn putchar(c: i32) i32;
+
+let one = 65536;
+let width = 600;
+let height = 400;
+let limit = 256;
+
+struct Color {
+    r: i64,
+    g: i64,
+    b: i64,
+}
+
+// The colours that the palette fades between, in a loop.
+var stops: [4]Color;
+
+fn setStop(i: i64, r: i64, g: i64, b: i64) {
+    stops[i].r = r;
+    stops[i].g = g;
+    stops[i].b = b;
+}
+
+fn blend(a: i64, b: i64, t: i64, steps: i64) i64 {
+    return a + (b - a) * t / steps;
+}
+
+// Colour for a point that escaped after n steps: 16 steps from each
+// stop to the next.
+fn shade(n: i64, out: *Color) {
+    let t = n % 64;
+    let from = &stops[t / 16];
+    let to = &stops[(t / 16 + 1) % 4];
+    out.r = blend(from.r, to.r, t % 16, 16);
+    out.g = blend(from.g, to.g, t % 16, 16);
+    out.b = blend(from.b, to.b, t % 16, 16);
+}
+
+fn escape(cre: i64, cim: i64) i64 {
+    var re = 0;
+    var im = 0;
+    var n = 0;
+    while n < limit {
+        let re2 = re * re / one;
+        let im2 = im * im / one;
+        if re2 + im2 > 4 * one {
+            return n;
+        }
+        im = 2 * re * im / one + cim;
+        re = re2 - im2 + cre;
+        n = n + 1;
+    }
+    return limit;
+}
+
+fn main() {
+    setStop(0, 0, 7, 100);
+    setStop(1, 32, 107, 203);
+    setStop(2, 237, 255, 255);
+    setStop(3, 255, 170, 0);
+
+    printf("P6\n%ld %ld\n255\n", width, height);
+    var pixel: Color;
+    var y = 0;
+    while y < height {
+        // From -1.1667 at the top to 1.1667 at the bottom.
+        let cim = (y * 2 - height) * one * 7 / 6 / height;
+        var x = 0;
+        while x < width {
+            // From -2.5 on the left to 1.0 on the right.
+            let cre = -one * 5 / 2 + x * one * 7 / 2 / width;
+            let n = escape(cre, cim);
+            if n == limit {
+                pixel.r = 0;
+                pixel.g = 0;
+                pixel.b = 0;
+            } else {
+                shade(n, &pixel);
+            }
+            putchar(pixel.r as i32);
+            putchar(pixel.g as i32);
+            putchar(pixel.b as i32);
+            x = x + 1;
+        }
+        y = y + 1;
+    }
+}

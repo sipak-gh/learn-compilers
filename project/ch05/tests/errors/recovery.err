@@ -1,0 +1,15 @@
+errors/recovery.peb:3:13: error: expected an expression, found ';'
+    let x = ;
+            ^
+errors/recovery.peb:5:5: error: expected ';', found 'if'
+    if x > { y = 1; }
+    ^~
+errors/recovery.peb:5:12: error: expected an expression, found '{'
+    if x > { y = 1; }
+           ^
+errors/recovery.peb:6:15: error: expected an expression, found ';'
+    return x +;
+              ^
+errors/recovery.peb:9:26: error: expected ')', found '{'
+fn helper(a: i64, b: i64 {
+                         ^

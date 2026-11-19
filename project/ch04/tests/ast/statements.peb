@@ -1,0 +1,22 @@
+extern fn printf(format, ...);
+
+fn sign(n) {
+    if n < 0 {
+        return -1;
+    } else if n == 0 {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+fn main() {
+    var i = 0;
+    while i < 10 {
+        i = i + 1;
+        if i % 2 == 0 { continue; }
+        if i > 7 { break; }
+        { let s = sign(i); printf("%ld\n", s); }
+    }
+    return;
+}

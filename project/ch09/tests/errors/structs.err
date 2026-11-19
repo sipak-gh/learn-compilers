@@ -1,0 +1,51 @@
+errors/structs.peb:10:8: error: struct 'Point' is already declared
+struct Point {
+       ^~~~~
+errors/structs.peb:4:8: note: the first declaration is here
+struct Point {
+       ^~~~~
+errors/structs.peb:20:8: error: 'i64' is already the name of a type
+struct i64 {
+       ^~~
+errors/structs.peb:7:5: error: 'Point' already has a field named 'x'
+    x: i32,
+    ^
+errors/structs.peb:5:5: note: the first one is here
+    x: i64,
+    ^
+errors/structs.peb:15:11: error: 'Loop' cannot contain itself; use a pointer, '*Loop'
+    next: Loop,
+          ^~~~
+errors/structs.peb:18:8: error: a struct needs at least one field
+struct Empty {}
+       ^~~~~
+errors/structs.peb:24:14: error: a struct cannot be passed to a function; pass a pointer to it
+fn length(p: Point) i64 {
+             ^~~~~
+errors/structs.peb:28:13: error: a function cannot return a struct; fill one in through a pointer parameter instead
+fn origin() Point {
+            ^~~~~
+errors/structs.peb:35:7: error: 'Point' has no field named 'z'
+    p.z = 1;
+      ^
+errors/structs.peb:4:8: note: 'Point' is declared here
+struct Point {
+       ^~~~~
+errors/structs.peb:37:13: error: a value of type 'i64' has no fields
+    let m = n.x;
+            ^
+errors/structs.peb:38:13: error: the type of 'null' is unknown here; give the variable a pointer type, as in 'var p: *u8 = null;'
+    let q = null;
+            ^~~~
+errors/structs.peb:41:13: error: cannot convert 'Point' to 'i64' with 'as'
+    let t = p as i64;
+            ^~~~~~~~
+errors/structs.peb:42:16: error: '==' cannot be used on 'Point'
+    let same = p == p;
+               ^
+errors/structs.peb:43:21: error: a struct cannot be passed to a function; pass a pointer to it
+    printf("%ld\n", p);
+                    ^
+errors/structs.peb:44:23: error: unknown type 'Pont'
+    let size = sizeof(Pont);
+                      ^~~~

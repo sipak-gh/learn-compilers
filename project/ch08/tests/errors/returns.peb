@@ -1,0 +1,24 @@
+fn sign(n: i64) i64 {
+    if n < 0 {
+        return -1;
+    } else if n > 0 {
+        return 1;
+    }
+}
+
+fn twice(n: i64) i64 {
+    return;
+}
+
+fn hello() {
+    return 1;
+}
+
+fn forever() i32 {
+    while true {
+    }
+}
+
+fn main() i64 {
+    return 0;
+}

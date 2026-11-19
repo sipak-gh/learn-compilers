@@ -1,0 +1,3 @@
+errors/missing_semicolon.peb:2:25: error: expected ';', found an integer
+    let x = 2 * (3 + 4) 5;
+                        ^

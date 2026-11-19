@@ -1,0 +1,20 @@
+// The sieve of Eratosthenes: the primes below 100.
+extern fn printf(format: *u8, ...) i32;
+
+var composite: [100]bool;
+
+fn main() {
+    var n = 2;
+    while n < 100 {
+        if !composite[n] {
+            printf("%ld ", n);
+            var m = n * n;
+            while m < 100 {
+                composite[m] = true;
+                m = m + n;
+            }
+        }
+        n = n + 1;
+    }
+    printf("\n");
+}

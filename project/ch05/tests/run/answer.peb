@@ -1,0 +1,5 @@
+extern fn printf(format: *u8, ...) i32;
+
+fn main() {
+    printf("%ld\n", 6 * (3 + 4));
+}

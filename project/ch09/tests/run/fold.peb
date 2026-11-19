@@ -1,0 +1,51 @@
+// Constant expressions: pebc works them out while compiling. The
+// results must be the same as if the program computed them.
+extern fn printf(format: *u8, ...) i32;
+
+// A global's value can be any constant expression now.
+let seconds_per_day = 60 * 60 * 24;
+let low_byte = 1000 as u8;
+let table_bytes = 16 * sizeof(i64);
+let neither = !true || 1 > 2;
+
+fn say(name: *u8, value: bool) bool {
+    printf("%s ", name);
+    return value;
+}
+
+fn main() {
+    printf("%ld %d %ld %d\n", seconds_per_day, low_byte, table_bytes, neither);
+
+    // Wrapping around, exactly like the machine.
+    let big: i32 = 2147483647 + 1;
+    let byte: u8 = 200 + 100;
+    printf("%d %d %d %d\n", big, byte, -1 as u8, 4294967295 as i32);
+    printf("%ld %ld %ld %ld\n", -7 / 2, -7 % 2, 7 / -2, 7 % -2);
+
+    // A branch that can never run is not even compiled.
+    if 1 > 2 {
+        printf("never\n");
+    } else if 2 > 1 {
+        printf("always\n");
+    } else {
+        printf("never either\n");
+    }
+    while false {
+        printf("never\n");
+    }
+    var n = 0;
+    while true {
+        n = n + 1;
+        if n == 3 {
+            break;
+        }
+    }
+    printf("n = %ld\n", n);
+
+    // The left side decides, so the right side is never called...
+    printf("= %d\n", false && say("a", true));
+    printf("= %d\n", true || say("b", true));
+    // ...or doesn't, so it is.
+    printf("= %d\n", true && say("c", true));
+    printf("= %d\n", false || say("d", false));
+}

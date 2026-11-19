@@ -1,0 +1,22 @@
+# The same bits, read two ways. QBE has no signed or unsigned types:
+# the instruction decides.
+data $byte = { b 200 }
+data $fmt = { b "%-6s signed %11d   unsigned %11u", b 10, b 0 }
+data $cmp = { b "x < 1", b 0 }
+data $div = { b "x / 2", b 0 }
+data $load = { b "byte", b 0 }
+
+export function w $main() {
+@start
+	%x =w sub 0, 1                  # all 32 bits set
+	%slt =w csltw %x, 1             # -1 < 1
+	%ult =w cultw %x, 1             # 4294967295 < 1
+	call $printf(l $fmt, ..., l $cmp, w %slt, w %ult)
+	%sdiv =w div %x, 2
+	%udiv =w udiv %x, 2
+	call $printf(l $fmt, ..., l $div, w %sdiv, w %udiv)
+	%sb =w loadsb $byte             # copies bit 7 into bits 8..31
+	%ub =w loadub $byte             # fills bits 8..31 with zeros
+	call $printf(l $fmt, ..., l $load, w %sb, w %ub)
+	ret 0
+}

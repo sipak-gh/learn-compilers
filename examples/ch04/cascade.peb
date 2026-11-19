@@ -1,0 +1,7 @@
+fn main() {
+    var y = 0;
+    if y > 1
+        y = 2;
+    }
+    return y;
+}

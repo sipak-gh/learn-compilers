@@ -1,0 +1,17 @@
+// The first 20 Fibonacci numbers, the slow recursive way.
+extern fn printf(format, ...);
+
+fn fib(n) {
+    if n < 2 {
+        return n;
+    }
+    return fib(n - 1) + fib(n - 2);
+}
+
+fn main() {
+    var i = 0;
+    while i < 20 {
+        printf("fib(%ld) = %ld\n", i, fib(i));
+        i = i + 1;
+    }
+}

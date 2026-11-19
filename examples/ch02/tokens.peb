@@ -1,0 +1,4 @@
+fn main() {
+	let s = "hi\n";
+	if x >= 0x1F && c != '\t' { return; }
+}

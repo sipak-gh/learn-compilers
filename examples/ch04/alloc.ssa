@@ -1,0 +1,13 @@
+# An alloc8 inside a loop is legal, but the stack grows on every iteration.
+export function w $main() {
+@start
+	%i =l copy 0
+@loop
+	%p =l alloc8 8
+	storel %i, %p
+	%i =l add %i, 1
+	%c =l csltl %i, 3
+	jnz %c, @loop, @end
+@end
+	ret 0
+}

@@ -1,0 +1,26 @@
+// Primes below 50 by trial division, with break and continue.
+extern fn printf(format, ...);
+
+fn main() {
+    var n = 1;
+    while true {
+        n = n + 1;
+        if n >= 50 {
+            break;
+        }
+        var d = 2;
+        var prime = true;
+        while d * d <= n {
+            if n % d == 0 {
+                prime = false;
+                break;
+            }
+            d = d + 1;
+        }
+        if !prime {
+            continue;
+        }
+        printf("%ld ", n);
+    }
+    printf("\n");
+}

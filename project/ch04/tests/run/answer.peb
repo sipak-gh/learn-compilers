@@ -1,0 +1,5 @@
+extern fn printf(format, ...);
+
+fn main() {
+    printf("%ld\n", 6 * (3 + 4));
+}

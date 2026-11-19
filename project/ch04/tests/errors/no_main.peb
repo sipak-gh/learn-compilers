@@ -1,0 +1,8 @@
+extern fn puts(s);
+
+fn helper() {
+    puts("I am not main");
+}
+
+fn helper() {
+}

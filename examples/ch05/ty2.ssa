@@ -1,0 +1,15 @@
+# =w copy of an l value at run time keeps the low 32 bits.
+data $fmt = { b "%d\n", b 0 }
+function w $trunc(l %x) {
+@start
+	%n =w copy %x
+	ret %n
+}
+export function w $main() {
+@start
+	%r =w call $trunc(l 4294967301)
+	call $printf(l $fmt, ..., w %r)
+	%r2 =w call $trunc(l -1)
+	call $printf(l $fmt, ..., w %r2)
+	ret 0
+}

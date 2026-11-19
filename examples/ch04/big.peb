@@ -1,0 +1,11 @@
+// The same test as jnz.ssa, written in Pebble: is 1 << 32 true?
+extern fn printf(format, ...);
+
+fn main() {
+    var big = 4294967296;
+    if big {
+        printf("big=1\n");
+    } else {
+        printf("big=0\n");
+    }
+}

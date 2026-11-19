@@ -1,0 +1,1 @@
+(+ (- (. x y)) (* (* (index p 2)) (! (call f 1 (call g 2)))))

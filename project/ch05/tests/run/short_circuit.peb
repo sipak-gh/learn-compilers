@@ -1,0 +1,13 @@
+// && and || stop as soon as they know the answer.
+extern fn printf(format: *u8, ...) i32;
+
+fn say(name: *u8, value: bool) bool {
+    printf("%s ", name);
+    return value;
+}
+
+fn main() {
+    printf("= %d\n", say("a", true) && say("b", false) && say("c", true));
+    printf("= %d\n", say("a", false) || say("b", true) || say("c", true));
+    printf("= %d\n", say("a", false) && say("b", true) || say("c", true));
+}

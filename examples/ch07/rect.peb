@@ -1,0 +1,26 @@
+extern fn printf(format: *u8, ...) i32;
+extern fn malloc(size: i64) *u8;
+
+struct Point {
+    x: i64,
+    y: i64,
+}
+
+struct Rect {
+    min: Point,
+    max: Point,
+}
+
+fn width(r: *Rect) i64 {
+    return r.max.x - r.min.x;
+}
+
+fn main() {
+    var a: Rect;
+    a.max.x = 10;
+    var b = a;
+    b.max = a.min;
+    let heap = malloc(sizeof(Rect)) as *Rect;
+    *heap = a;
+    printf("%ld %ld %ld\n", width(&a), width(&b), width(heap));
+}

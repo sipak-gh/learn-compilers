@@ -1,0 +1,68 @@
+// Structs: fields, copies, pointers, layout.
+extern fn printf(format: *u8, ...) i32;
+
+struct Point {
+    x: i64,
+    y: i64,
+}
+
+struct Rect {
+    min: Point,
+    max: Point,
+}
+
+// A u8 between two i64s: 7 bytes of padding after it.
+struct Padded {
+    a: i64,
+    b: u8,
+    c: i64,
+}
+
+struct Small {
+    tag: u8,
+    count: i32,
+    flag: u8,
+}
+
+// Structs can't be passed by value; pass a pointer.
+fn area(r: *Rect) i64 {
+    return (r.max.x - r.min.x) * (r.max.y - r.min.y);
+}
+
+fn grow(r: *Rect, by: i64) {
+    r.min.x = r.min.x - by;
+    r.min.y = r.min.y - by;
+    r.max.x = r.max.x + by;
+    r.max.y = r.max.y + by;
+}
+
+var origin: Point;
+
+fn main() {
+    var r: Rect;
+    r.max.x = 4;
+    r.max.y = 3;
+    printf("area = %ld\n", area(&r));
+
+    // A copy is a copy: changing r afterwards doesn't change saved.
+    var saved = r;
+    grow(&r, 1);
+    printf("area = %ld, saved area = %ld\n", area(&r), area(&saved));
+    printf("r.min = (%ld, %ld)\n", r.min.x, r.min.y);
+
+    var corners: [4]Point;
+    corners[1] = r.max;
+    corners[2].y = 7;
+    printf("corners[1] = (%ld, %ld), corners[2].y = %ld\n", corners[1].x, corners[1].y, corners[2].y);
+
+    let p = &corners[1];
+    p.x = 100;
+    printf("corners[1].x = %ld, (*p).y = %ld\n", corners[1].x, (*p).y);
+    printf("origin = (%ld, %ld)\n", origin.x, origin.y);
+
+    printf("sizeof: Point %ld, Rect %ld, Padded %ld, Small %ld, [4]Point %ld, *Rect %ld\n",
+        sizeof(Point), sizeof(Rect), sizeof(Padded), sizeof(Small), sizeof([4]Point), sizeof(*Rect));
+    var pad: Padded;
+    printf("offsets in Padded: %ld %ld %ld\n",
+        (&pad.a) as i64 - (&pad) as i64, (&pad.b) as i64 - (&pad) as i64, (&pad.c) as i64 - (&pad) as i64);
+}

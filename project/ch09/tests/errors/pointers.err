@@ -1,0 +1,48 @@
+errors/pointers.peb:5:13: error: the value of a global variable must be a constant
+var start = total;
+            ^~~~~
+errors/pointers.peb:6:5: error: a 'let' needs a value
+let empty: i64;
+    ^~~~~
+errors/pointers.peb:7:14: error: an array needs at least one element
+var nothing: [0]i64;
+             ^~~~~~
+errors/pointers.peb:9:11: error: an array cannot be passed to a function; pass a pointer to its first element
+fn sum(a: [4]i64) i64 {
+          ^~~~~~
+errors/pointers.peb:15:14: error: cannot take the address of 'x', which was declared with 'let'
+    var p = &x;
+             ^
+errors/pointers.peb:14:9: note: use 'var' here to make it a variable
+    let x = 1;
+        ^
+errors/pointers.peb:18:14: error: '*' needs a pointer, not 'i64'
+    let n = *y;
+             ^
+errors/pointers.peb:21:5: error: cannot assign a whole array; assign its elements one by one
+    b = c;
+    ^
+errors/pointers.peb:22:13: error: an array cannot be used as a value; use its elements, or a pointer such as '&a[0]'
+    let d = b;
+            ^
+errors/pointers.peb:23:15: error: an index must be an integer, not 'bool'
+    let e = b[true];
+              ^~~~
+errors/pointers.peb:24:13: error: cannot index a value of type 'i64'
+    let f = y[0];
+            ^
+errors/pointers.peb:25:13: error: '+' cannot be used on '*i64'
+    let g = q + 1;
+            ^
+errors/pointers.peb:25:13: note: Pebble has no pointer arithmetic; for the address of element i, write '&p[i]'
+    let g = q + 1;
+            ^~~~~
+errors/pointers.peb:26:14: error: cannot take the address of this expression
+    let h = &5;
+             ^
+errors/pointers.peb:27:9: error: a 'let' needs a value
+    let k: i64;
+        ^
+errors/pointers.peb:28:21: error: an array cannot be used as a value; use its elements, or a pointer such as '&a[0]'
+    printf("%ld\n", b);
+                    ^

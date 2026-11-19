@@ -1,0 +1,12 @@
+# Two ways to cut a 64-bit value down to 32 bits.
+data $fmt = { b "%d %d", b 10, b 0 }
+export function w $main() {
+@start
+	%n.1 =l alloc8 8
+	storel 5000000000, %n.1
+	%.1 =l loadl %n.1
+	%.2 =w copy %.1                 # QBE knows %.1 is a constant...
+	%.3 =w and %.1, 4294967295      # ...and here it folds the and
+	call $printf(l $fmt, ..., w %.2, w %.3)
+	ret 0
+}

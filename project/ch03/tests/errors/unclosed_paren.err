@@ -1,0 +1,3 @@
+errors/unclosed_paren.peb:1:7: error: expected ')', found end of file
+(1 + 2
+      ^

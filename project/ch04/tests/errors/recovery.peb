@@ -1,0 +1,15 @@
+// One run reports every syntax error, not just the first.
+fn main() {
+    let x = ;
+    var y = 2
+    if x > { y = 1; }
+    return x +;
+}
+
+fn helper(a, b {
+    return a;
+}
+
+fn ok() {
+    return 1;
+}

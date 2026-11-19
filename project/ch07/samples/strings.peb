@@ -1,0 +1,36 @@
+// Reverses each word of a sentence in place.
+extern fn printf(format: *u8, ...) i32;
+
+fn reverse(s: *u8, from: i64, to: i64) {
+    var i = from;
+    var j = to - 1;
+    while i < j {
+        let t = s[i];
+        s[i] = s[j];
+        s[j] = t;
+        i = i + 1;
+        j = j - 1;
+    }
+}
+
+fn main() {
+    var buf: [64]u8;
+    let text = "the quick brown fox jumps over the lazy dog";
+    var n = 0;
+    while text[n] != 0 {
+        buf[n] = text[n];
+        n = n + 1;
+    }
+    buf[n] = 0;
+
+    var start = 0;
+    var i = 0;
+    while i <= n {
+        if buf[i] == ' ' || buf[i] == 0 {
+            reverse(&buf[0], start, i);
+            start = i + 1;
+        }
+        i = i + 1;
+    }
+    printf("%s\n%s\n", text, &buf[0]);
+}

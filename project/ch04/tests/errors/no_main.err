@@ -1,0 +1,9 @@
+errors/no_main.peb:7:4: error: 'helper' is already declared
+fn helper() {
+   ^~~~~~
+errors/no_main.peb:3:4: note: the first declaration is here
+fn helper() {
+   ^~~~~~
+errors/no_main.peb:1:1: error: the program has no 'main' function
+extern fn puts(s);
+^

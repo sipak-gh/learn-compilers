@@ -1,0 +1,3 @@
+errors/bad_char.peb:1:4: error: unexpected character '$'
+12 $ 3
+   ^

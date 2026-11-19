@@ -1,0 +1,15 @@
+# Memory in QBE: a global array, a stack slot, loads and stores.
+data $nums = { l 10 20 30 }
+data $fmt = { b "nums[2] = %ld, x = %ld", b 10, b 0 }
+
+export function w $main() {
+@start
+	%x =l alloc8 8          # 8 bytes on the stack; %x is their address
+	storel 5, %x
+	%p =l add $nums, 16     # the address of nums[2]: 2 * 8 bytes in
+	storel 31, %p
+	%a =l loadl %p
+	%b =l loadl %x
+	call $printf(l $fmt, ..., l %a, l %b)
+	ret 0
+}

@@ -1,0 +1,26 @@
+// The sieve of Eratosthenes: prints the primes below 1000, ten per line.
+extern fn printf(format: *u8, ...) i32;
+
+var composite: [1000]bool;
+
+fn main() {
+    var count = 0;
+    var n = 2;
+    while n < 1000 {
+        if !composite[n] {
+            printf("%5ld", n);
+            count = count + 1;
+            if count % 10 == 0 {
+                printf("\n");
+            }
+            // Every multiple of n from n*n on is not prime.
+            var m = n * n;
+            while m < 1000 {
+                composite[m] = true;
+                m = m + n;
+            }
+        }
+        n = n + 1;
+    }
+    printf("\n%ld primes below 1000\n", count);
+}

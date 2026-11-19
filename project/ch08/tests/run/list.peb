@@ -1,0 +1,58 @@
+// A linked list on the heap, with malloc and free from libc.
+extern fn printf(format: *u8, ...) i32;
+extern fn malloc(size: i64) *u8;
+extern fn free(p: *u8);
+
+struct Node {
+    value: i64,
+    next: *Node,
+}
+
+fn push(head: *Node, value: i64) *Node {
+    let node = malloc(sizeof(Node)) as *Node;
+    node.value = value;
+    node.next = head;
+    return node;
+}
+
+fn reverse(head: *Node) *Node {
+    var done: *Node = null;
+    var rest = head;
+    while rest != null {
+        let next = rest.next;
+        rest.next = done;
+        done = rest;
+        rest = next;
+    }
+    return done;
+}
+
+fn print(head: *Node) {
+    var n = head;
+    while n != null {
+        printf("%ld ", n.value);
+        n = n.next;
+    }
+    printf("\n");
+}
+
+fn main() {
+    var list: *Node = null;
+    var i = 1;
+    while i <= 5 {
+        list = push(list, i * i);
+        i = i + 1;
+    }
+    print(list);
+    list = reverse(list);
+    print(list);
+
+    var count = 0;
+    while list != null {
+        let next = list.next;
+        free(list as *u8);
+        list = next;
+        count = count + 1;
+    }
+    printf("freed %ld nodes\n", count);
+}

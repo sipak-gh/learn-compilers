@@ -1,0 +1,54 @@
+// The Mandelbrot set in ASCII, with fixed-point numbers: an i64 n
+// stands for n / 4096, so 1.5 is 6144.
+extern fn putchar(c: i32) i32;
+
+struct Complex {
+    re: i64,
+    im: i64,
+}
+
+let one = 4096;
+
+fn mul(a: i64, b: i64) i64 {
+    return a * b / one;
+}
+
+// How many steps of z = z*z + c before |z| > 2, up to `limit`.
+fn escape(c: *Complex, limit: i64) i64 {
+    var z: Complex;
+    var n = 0;
+    while n < limit {
+        let re2 = mul(z.re, z.re);
+        let im2 = mul(z.im, z.im);
+        if re2 + im2 > 4 * one {
+            return n;
+        }
+        z.im = 2 * mul(z.re, z.im) + c.im;
+        z.re = re2 - im2 + c.re;
+        n = n + 1;
+    }
+    return limit;
+}
+
+fn main() {
+    // From "escaped at once" to "nearly stayed".
+    let shades = ".,:;-=+*#%";
+    var c: Complex;
+    var row = 0;
+    while row < 25 {
+        c.im = -one * 6 / 5 + row * one / 10;
+        var col = 0;
+        while col < 64 {
+            c.re = -one * 11 / 5 + col * one * 3 / 64;
+            let n = escape(&c, 50);
+            if n == 50 {
+                putchar('@');
+            } else {
+                putchar(shades[n * 10 / 50] as i32);
+            }
+            col = col + 1;
+        }
+        putchar('\n');
+        row = row + 1;
+    }
+}

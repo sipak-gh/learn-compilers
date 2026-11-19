@@ -1,0 +1,5 @@
+export function w $main() {
+@start
+	%x =w div 7, 0
+	ret %x
+}

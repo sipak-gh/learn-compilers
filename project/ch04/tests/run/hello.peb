@@ -1,0 +1,6 @@
+extern fn printf(format, ...);
+
+fn main() {
+    printf("Hello, world!\n");
+    printf("%s has %ld letters\n", "Pebble", 6);
+}

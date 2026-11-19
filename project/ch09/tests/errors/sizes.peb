@@ -1,0 +1,25 @@
+// Types too big to exist. (Before, pebc crashed computing their size.)
+struct Huge {
+    cells: [1000000][1000000]u8,
+}
+
+struct Pair {
+    a: [1500000000]u8,
+    b: [1500000000]u8,
+}
+
+struct Table {
+    rows: [1000000]Row,
+}
+
+struct Row {
+    cells: [1000]i64,
+}
+
+var table: [1000000]Row;
+
+fn main() {
+    var a: [9223372036854775807]i64;
+    var fine: [1000]Row;
+    let n = sizeof([4611686018427387904]i64);
+}

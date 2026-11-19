@@ -1,0 +1,3 @@
+errors/unsupported_call.peb:1:5: error: pebc cannot compile calls yet
+1 + f(2)
+    ^~~~

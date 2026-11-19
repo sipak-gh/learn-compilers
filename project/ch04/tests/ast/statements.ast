@@ -1,0 +1,25 @@
+(extern fn printf (format ...))
+(fn sign (n)
+  (if (< n 0)
+    (block
+      (return (- 1)))
+    (if (== n 0)
+      (block
+        (return 0))
+      (block
+        (return 1)))))
+(fn main ()
+  (var i 0)
+  (while (< i 10)
+    (block
+      (= i (+ i 1))
+      (if (== (% i 2) 0)
+        (block
+          (continue)))
+      (if (> i 7)
+        (block
+          (break)))
+      (block
+        (let s (call sign i))
+        (call printf "%ld\n" s))))
+  (return))

@@ -1,0 +1,21 @@
+errors/fold.peb:3:34: error: division by zero
+let bad_global = 24 * 60 * 60 / (60 - 60);
+                                 ^~~~~~~
+errors/fold.peb:8:17: error: division by zero
+    total = i / 0;
+                ^
+errors/fold.peb:9:18: error: division by zero
+    total = i % (5 - 5);
+                 ^~~~~
+errors/fold.peb:10:15: error: index 10 is out of bounds for '[10]i64'
+    total = a[10];
+              ^~
+errors/fold.peb:11:15: error: index -1 is out of bounds for '[10]i64'
+    total = a[2 * 5 - 11];
+              ^~~~~~~~~~
+errors/fold.peb:12:14: error: -9223372036854775808 / -1 overflows 'i64'
+    total = (-9223372036854775807 - 1) / -1;
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+errors/fold.peb:13:18: error: -2147483648 / -1 overflows 'i32'
+    let worst = (-2147483647 - 1) as i32 / (0 - 1) as i32;
+                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,13 @@
+// && and || stop as soon as they know the answer.
+extern fn printf(format, ...);
+
+fn say(name, value) {
+    printf("%s ", name);
+    return value;
+}
+
+fn main() {
+    printf("= %ld\n", say("a", 1) && say("b", 0) && say("c", 1));
+    printf("= %ld\n", say("a", 0) || say("b", 7) || say("c", 1));
+    printf("= %ld\n", say("a", 0) && say("b", 1) || say("c", 1));
+}

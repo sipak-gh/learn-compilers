@@ -1,0 +1,33 @@
+errors/types.peb:4:21: error: 300 does not fit in 'u8'
+    let small: u8 = 300;
+                    ^~~
+errors/types.peb:7:15: error: '+' needs operands of the same type, not 'i64' and 'i32'
+    let sum = wide + narrow;
+              ^~~~~~~~~~~~~
+errors/types.peb:7:22: note: convert one of them with 'as'
+    let sum = wide + narrow;
+                     ^~~~~~
+errors/types.peb:8:15: error: unknown type 'boolean'
+    var flag: boolean = true;
+              ^~~~~~~
+errors/types.peb:9:8: error: a condition must be a 'bool', not 'i64'
+    if wide {
+       ^~~~
+errors/types.peb:12:12: error: '!' needs a 'bool', not 'i64'
+    while !wide {
+           ^~~~
+errors/types.peb:14:26: error: '&&' needs 'bool' operands, not 'i32'
+    let ok = wide > 0 && narrow;
+                         ^~~~~~
+errors/types.peb:15:15: error: cannot negate a value of type 'u8'
+    let neg = -small;
+              ^~~~~~
+errors/types.peb:16:13: error: cannot convert 'i64' to 'bool' with 'as'; compare it with 0 instead
+    let t = 1 as bool;
+            ^~~~~~~~~
+errors/types.peb:17:18: error: expected '*u8', found 'i64'
+    let s: *u8 = 65;
+                 ^~
+errors/types.peb:18:19: error: this call returns nothing, so its result cannot be used
+    let nothing = main();
+                  ^~~~~~

@@ -1,0 +1,10 @@
+extern fn printf(format, ...);
+
+fn main() {
+    printf("%ld\n", 1 + 2 * 3 - 4 / 2);
+    printf("%ld\n", (1 + 2) * 3 - -4);
+    printf("%ld %ld\n", -7 / 2, -7 % 2);
+    printf("%ld\n", 'A' + 1);
+    printf("%ld %ld %ld\n", 1 < 2, 2 <= 1, !(3 == 3));
+    printf("%ld\n", 9223372036854775807 + 1);
+}

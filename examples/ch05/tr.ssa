@@ -1,0 +1,11 @@
+# A mistake: extsw sign-extends a w, but %n is an l.
+data $fmt = { b "%d\n", b 0 }
+export function w $main() {
+@start
+	%s =l alloc8 8
+	storel 5000000000, %s
+	%n =l loadl %s
+	%w =w extsw %n
+	call $printf(l $fmt, ..., w %w)
+	ret 0
+}

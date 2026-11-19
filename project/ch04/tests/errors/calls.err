@@ -1,0 +1,24 @@
+errors/calls.peb:8:5: error: 'add' takes 2 arguments, but 1 was given
+    add(1);
+    ^~~~~~
+errors/calls.peb:3:4: note: 'add' is declared here
+fn add(a, b) {
+   ^~~
+errors/calls.peb:9:5: error: 'add' takes 2 arguments, but 3 were given
+    add(1, 2, 3);
+    ^~~~~~~~~~~~
+errors/calls.peb:3:4: note: 'add' is declared here
+fn add(a, b) {
+   ^~~
+errors/calls.peb:10:5: error: 'printf' takes at least 1 argument, but 0 were given
+    printf();
+    ^~~~~~~~
+errors/calls.peb:1:11: note: 'printf' is declared here
+extern fn printf(format, ...);
+          ^~~~~~
+errors/calls.peb:12:5: error: 'n' is a variable, not a function
+    n(1);
+    ^
+errors/calls.peb:13:5: error: unknown function 'missing'
+    missing(2);
+    ^~~~~~~
